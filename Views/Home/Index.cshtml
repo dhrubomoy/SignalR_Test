@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<br /><br /><br />
+<h2 class="test">
+    <hr />
+</h2>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/signalr/jquery.signalR-2.2.0.js"></script>
+<script src="/signalr/hubs"></script>
+
+<script>
+    let chat = $.connection.chat;
+    let hub = $.connection.hub;
+
+    chat.client.sayWhassup = function (msg) {
+        $('.test').append(msg);
+    };
+
+    hub.start().done(function () {
+        chat.server.whassup();
+    })
+</script>
